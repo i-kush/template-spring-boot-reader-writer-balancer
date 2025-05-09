@@ -1,0 +1,35 @@
+services:
+
+  postgres-writer-instance:
+    container_name: postgres-writer-instance
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password2
+      POSTGRES_USER: writer-admin
+      POSTGRES_DB: writer-instance-db
+    ports:
+      - "12121:5432"
+    volumes:
+      - writer-instance-data:/var/lib/postgresql/data
+      - ./writer-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  postgres-reader-instance:
+    container_name: postgres-reader-instance
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password2
+      POSTGRES_USER: reader-admin
+      POSTGRES_DB: reader-instance-db
+    ports:
+      - "12122:5432"
+    volumes:
+      - reader-instance-data:/var/lib/postgresql/data
+      - ./reader-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  writer-instance-data:
+    driver: local
+  reader-instance-data:
+    driver: local
