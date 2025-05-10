@@ -19,5 +19,8 @@ A Spring Boot WEB and JPA application template with reader and writer data sourc
 4. Verify DB content - write query was routed to the writer DB and read query was routed to the reader DB
 
 ## Important notes
+
 - `@Primary` data source still should be defined in order to successfully initialise entity manager and related JPA beans
 - Aspect order should be higher than the transactional related ones, including the router itself
+- Hikari connection pool properties should be defined on the data source properties level, not under standard `hikari` because
+  autoconfiguration is not used for the data source

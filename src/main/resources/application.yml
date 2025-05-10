@@ -1,19 +1,24 @@
 spring:
   datasource:
-    hikari:
-      maximum-pool-size: 50
-      minimum-idle: 5
-      idle-timeout: 3000
-      connection-timeout: 30000
     writer:
       driver-class-name: org.postgresql.Driver
       jdbc-url: jdbc:postgresql://localhost:12121/writer-instance-db
       username: writer-admin
       password: password2
+      # hikari
+      pool-name: writer-pool
+      maximum-pool-size: 50
+      minimum-idle: 5
+      connection-timeout: 30000
     reader:
       driver-class-name: org.postgresql.Driver
       jdbc-url: jdbc:postgresql://localhost:12122/reader-instance-db
       username: reader-admin
       password: password2
+      # hikari
+      pool-name: reader-pool
+      maximum-pool-size: 50
+      minimum-idle: 5
+      connection-timeout: 30000
   jpa:
     open-in-view: false
